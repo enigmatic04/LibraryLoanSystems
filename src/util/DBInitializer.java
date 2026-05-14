@@ -16,6 +16,8 @@ public class DBInitializer {
                         con.createStatement()
         ) {
 
+            // MEMBERS TABLE
+
             try {
 
                 st.executeUpdate(
@@ -30,6 +32,8 @@ public class DBInitializer {
             } catch (Exception e) {
                 System.out.println("Members table already exists.");
             }
+
+            // BOOKS TABLE
 
             try {
 
@@ -47,6 +51,8 @@ public class DBInitializer {
                 System.out.println("Books table already exists.");
             }
 
+            // LOANS TABLE
+
             try {
 
                 st.executeUpdate(
@@ -62,6 +68,32 @@ public class DBInitializer {
 
             } catch (Exception e) {
                 System.out.println("Loans table already exists.");
+            }
+
+            // INDEXES
+
+            try {
+
+                st.executeUpdate(
+                        "CREATE INDEX idx_book_title ON Books(title)"
+                );
+
+                System.out.println("Book index created.");
+
+            } catch (Exception e) {
+                System.out.println("Book index already exists.");
+            }
+
+            try {
+
+                st.executeUpdate(
+                        "CREATE INDEX idx_member_loans ON Loans(member_id)"
+                );
+
+                System.out.println("Loan index created.");
+
+            } catch (Exception e) {
+                System.out.println("Loan index already exists.");
             }
 
         } catch (Exception e) {
